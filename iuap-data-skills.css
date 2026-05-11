@@ -1,14 +1,134 @@
 /**
- * iuap-data-skills 统一样式表（优化版）
- * 合并自：iuap-data-visualization、iuap-data-report、iuap-data-summary
+ * iuap-data-skills 统一样式表
+ * ============================================================
+ * 类名索引（技能输出必须使用以下类名）
+ * ============================================================
  *
- * 使用方式：在HTML模板中通过 <link> 引入
- * <link rel="stylesheet" href="iuap-data-skills.css">
+ * 【布局容器】
+ * .container          - 图表主容器（max-width: 1400px）
+ * .report             - 报告容器
+ * .summary            - 摘要容器
+ * .report-body        - 报告正文区
+ * .summary-body       - 摘要正文区
  *
- * 优化说明：
- * 1. 合并重复定义的样式（.highlight、.trend-up/down）
- * 2. 提取公共容器样式
- * 3. 统一高亮和趋势样式
+ * 【章节结构】
+ * .section            - 章节容器（margin-bottom: 36px）
+ * .section-title      - 章节标题（一级标题，带左侧蓝色边框）
+ * .subsection         - 小节容器（margin-bottom: 24px）
+ * .subsection-title   - 小节标题（二级标题）
+ *
+ * 【图表相关】
+ * .charts-grid        - 多图网格布局（自动换行）
+ * .chart-card         - 图表卡片（带阴影和圆角）
+ * .chart-container    - 图表容器（默认高度400px）
+ * .chart-container.sm - 小尺寸图表（高度300px）
+ * .chart-container.lg - 大尺寸图表（高度500px）
+ * .chart-row          - 双图并排布局（flex布局）
+ * .chart-grid         - 双图网格布局（grid布局）
+ * .loading-placeholder - 加载占位符
+ *
+ * 【指标卡】
+ * .cards-container    - 指标卡容器（grid布局，自动换行）
+ * .data-card          - 指标卡（带背景色和圆角）
+ * .card-header-row    - 指标卡头部行（标题+图标）
+ * .indicator-title    - 指标标题（15px，加粗）
+ * .indicator-value    - 指标数值（24px，加粗）
+ * .value-unit         - 数值单位（15px）
+ *
+ * 【指标卡类型背景色】
+ * .card-amount        - 金额类型（蓝色背景）
+ * .card-volume        - 数量类型（青色背景）
+ * .card-profit        - 利润类型（绿色背景）
+ * .card-cost          - 成本类型（橙色背景）
+ * .card-sales         - 销售类型（橙红背景）
+ * .card-users         - 用户类型（紫色背景）
+ * .card-rate          - 比率类型（翠绿背景）
+ * .card-time          - 时间类型（紫罗兰背景）
+ * .card-growth        - 增长类型（草绿背景）
+ * .card-inventory     - 库存类型（琥珀背景）
+ * .card-customer      - 客户类型（金黄背景）
+ *
+ * 【图标背景色】
+ * .icon-bg            - 图标背景容器
+ * .icon-amount        - 金额图标（#3293fb）
+ * .icon-volume        - 数量图标（#32c4fa）
+ * .icon-profit        - 利润图标（#82df2b）
+ * .icon-cost          - 成本图标（#fcb530）
+ * .icon-sales         - 销售图标（#fb6832）
+ * .icon-users         - 用户图标（#737cfd）
+ * .icon-rate          - 比率图标（#1cd46b）
+ * .icon-time          - 时间图标（#b972fc）
+ * .icon-growth        - 增长图标（#77d83f）
+ * .icon-inventory     - 库存图标（#fba344）
+ * .icon-customer      - 客户图标（#f6bd4c）
+ * .card-icon          - 图标样式（绝对定位，白色）
+ *
+ * 【趋势样式】
+ * .trend-group        - 趋势组容器（flex布局）
+ * .trend-item         - 单个趋势项
+ * .trend-label        - 趋势标签（如"同比"、"环比"）
+ * .trend-up           - 上涨趋势（橙红色 #fb6832）
+ * .trend-down         - 下跌趋势（翠绿色 #1cd46b）
+ * .trend-neutral      - 持平趋势（灰色 #8c8c8c）
+ *
+ * 【文字样式】
+ * .insight-text       - 洞察文字段落
+ * .highlight          - 高亮文字（蓝色，加粗）
+ * .findings-content   - 核心发现内容
+ * .findings-title     - 核心发现标题
+ * .core-findings      - 核心发现模块（带左侧蓝色边框）
+ *
+ * 【标注样式】
+ * .insight-tag        - 洞察标注（圆角标签）
+ * .insight-tag.risk   - 风险标注（红色）
+ * .insight-tag.opportunity - 机会标注（绿色）
+ * .insight-tag.finding - 发现标注（橙色）
+ * .insight-tag.info   - 信息标注（蓝色）
+ * .confidence         - 置信度标注
+ * .confidence.high    - 高置信度（绿色）
+ * .confidence.medium  - 中置信度（黄色）
+ * .confidence.low     - 低置信度（橙色）
+ * .confidence.hypothesis - 假设（蓝色）
+ *
+ * 【报告头部】
+ * .report-header      - 报告头部（蓝色渐变背景）
+ * .report-header.simple - 简洁头部变体（白色背景）
+ * .summary-header     - 摘要头部
+ * .summary-header.simple - 简洁头部变体
+ *
+ * 【报告底部】
+ * .report-footer      - 报告底部
+ * .footer-tags        - 底部标签容器
+ * .footer-tag         - 底部标签
+ * .footer-tag.source  - 数据来源标签
+ * .footer-tag.method  - 分析方法标签
+ *
+ * 【其他组件】
+ * .action-card        - 行动建议卡片
+ * .priority           - 优先级标签
+ * .priority.high      - 高优先级（红色）
+ * .priority.medium    - 中优先级（橙色）
+ * .priority.low       - 低优先级（绿色）
+ * .risk-alert         - 风险提示卡片
+ * .data-table         - 数据表格
+ * .hypothesis-tree    - 假设树
+ * .quality-scorecard  - 健康度评分卡
+ * .progress-bar       - 进度条
+ *
+ * 【信息图】
+ * .infographic-container - 信息图容器
+ * .infographic-header - 信息图头部
+ * .header-title       - 信息图标题
+ * .header-subtitle    - 信息图副标题
+ *
+ * ============================================================
+ * 禁止事项
+ * ============================================================
+ * ❌ 禁止在输出中内嵌 <style> 定义样式
+ * ❌ 禁止使用未在本文档中定义的类名
+ * ❌ 禁止自定义颜色（必须使用CSS变量）
+ * ❌ 禁止覆盖统一样式文件中的样式定义
+ * ============================================================
  */
 
 /* ============================================================
@@ -449,6 +569,31 @@ body {
 /* ============================================================
    11. 报告专属样式
    ============================================================ */
+
+/* 小节样式 */
+.subsection {
+  margin-bottom: 24px;
+}
+
+.subsection-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 20px 0 12px 0;
+}
+
+/* 图表行布局（双图并排） */
+.chart-row {
+  display: flex;
+  gap: 20px;
+  margin: 16px 0;
+}
+
+.chart-row .chart-container {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
 
 /* 章节标题 */
 .section { margin-bottom: 36px; }
