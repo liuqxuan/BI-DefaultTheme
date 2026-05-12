@@ -1,5 +1,5 @@
 
-window.getBIEchartsDefaultTheme = function () {
+window.getDefaultTheme = function () {
     // 默认主题
     const echartsDefaultTheme = {
         color: [
