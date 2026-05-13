@@ -1,158 +1,101 @@
 /**
- * 报告样式文件
- * 包含：报告布局、指标卡、图表容器、组件样式、响应式
+ * 可视化技能统一样式文件
+ * 来源：iuap-data-visualization 技能
+ * CDN 地址：https://cdn.jsdelivr.net/gh/liuqxuan/BI-DefaultTheme@v1.0.6/visualization-styles.css
  *
+ * 包含内容：
+ * 1. ECharts 图表布局样式
+ * 2. 指标卡样式（卡片、图标、趋势）
+ * 3. 响应式样式
+ * 4. 打印样式
  */
 
-/* ====== Reset & Base ====== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ====== ECharts 图表布局样式 ====== */
 
-/*
- * ============================================================
- * 【铁律】主题 CSS 变量
- * ============================================================
- * 必须与 iuap-data-visualization ECharts 主题同步
- * 禁止自定义主题颜色
- * ============================================================
- */
-:root {
-  /* 主色调：与 ECharts defaultTheme 首色 #3293fb 同步 */
-  --color-primary: #3293fb;
-  --color-primary-dark: #1a73e8;
-  --color-primary-light: #e6f7ff;
-  --color-primary-rgb: 50, 147, 251;
-  /* 辅助色：与 ECharts defaultTheme 色板同步 */
-  --color-secondary: #82df2b;
-  --color-accent: #fcb530;
-  --color-warning: #fb6832;
-  --color-danger: #ff4d4f;
-  --color-success: #52c41a;
-  /* 背景色 */
-  --bg-page: #f0f2f5;
-  --bg-content: #ffffff;
-  --bg-card: #fafafa;
-  /* 文字色 */
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-muted: #8c8c8c;
-  /* 边框色 */
-  --border-color: #f0f0f0;
-}
-
-/* ====== 页面容器 ====== */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg-page);
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
-/* ====== 报告容器 ====== */
-.report {
-  max-width: 1200px;
+/* 容器 */
+.container {
+  max-width: 1400px;
   margin: 0 auto;
-  background: var(--bg-content);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
-/* ====== 报告头部 ====== */
-.report-header {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: #fff;
-  padding: 32px 40px;
+/* 单图居中布局 */
+.single-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.report-header h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
-.report-header .meta { font-size: 13px; opacity: 0.8; }
-.report-header .summary {
-  margin-top: 16px; padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  font-size: 14px; line-height: 1.8;
-}
-/* 简洁头部变体 */
-.report-header.simple {
-  background: var(--bg-content);
-  border-bottom: 3px solid var(--color-primary);
-  color: var(--text-primary);
-}
-.report-header.simple h1 { color: var(--text-primary); }
-.report-header.simple .meta { color: var(--text-muted); }
-.report-header.simple .summary {
-  color: var(--text-secondary);
-  border-top-color: var(--border-color);
+.single-chart .chart-card {
+  max-width: 900px;
+  width: 100%;
 }
 
-/* ====== 报告正文区 ====== */
-.report-body { padding: 32px 16px; }
-
-/* ====== 章节标题 ====== */
-.section { margin-bottom: 36px; }
-.section-title {
-  font-size: 18px; font-weight: 600; color: var(--text-primary);
-  margin-bottom: 16px; padding-left: 12px;
-  border-left: 3px solid var(--color-primary);
+/* 批量模式网格布局 */
+.charts-grid {
+  display: grid;
+  gap: 20px;
+}
+.charts-grid.cols-1 {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+.charts-grid.cols-1 .chart-card {
+  max-width: 900px;
+  width: 100%;
+}
+.charts-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.charts-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.charts-grid.cols-auto {
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
 }
 
-/* ====== 洞察文字 ====== */
-.insight-text {
-  font-size: 14px; line-height: 1.8;
-  color: var(--text-secondary); margin-bottom: 16px;
+/* 图表卡片 */
+.chart-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08),
+    0 4px 16px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+  box-sizing: border-box;
 }
-.insight-text strong { color: var(--text-primary); }
-
-/* ====== 高亮样式（跨容器复用）====== */
-/* 头部摘要高亮：白色/亮色文字（蓝色渐变背景上更醒目） */
-.report-header .summary .highlight {
-  color: #fff;
-  font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-}
-.report-header .summary .trend-up {
-  color: #ffd666;
-  font-weight: 700;
-}
-.report-header .summary .trend-down {
-  color: #95de64;
-  font-weight: 700;
+.chart-card:hover {
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.12),
+    0 8px 24px rgba(0,0,0,0.06);
 }
 
-/* 正文洞察高亮：蓝色/橙/绿文字（白色背景） */
-.insight-text .highlight { color: var(--color-primary); font-weight: 600; display: inline; }
-.insight-text .trend-up { color: #fb6832; font-weight: 600; display: inline; }
-.insight-text .trend-down { color: #1cd46b; font-weight: 600; display: inline; }
-
-/* ====== 洞察标注 ====== */
-.insight-tag {
-  display: inline-block; font-size: 12px;
-  padding: 2px 8px; border-radius: 4px;
-  margin-right: 6px; font-weight: 500;
-}
-.insight-tag.risk { background: #fff1f0; color: #cf1322; }
-.insight-tag.opportunity { background: #f6ffed; color: #389e0d; }
-.insight-tag.finding { background: #fff7e6; color: #d46b08; }
-.insight-tag.info { background: var(--color-primary-light); color: var(--color-primary-dark); }
-
-/* ====== 置信度标注 ====== */
-.confidence {
-  display: inline-block; font-size: 11px;
-  padding: 1px 6px; border-radius: 3px; margin-left: 6px;
-}
-.confidence.high { background: #f6ffed; color: #389e0d; }
-.confidence.medium { background: #fffbe6; color: #d48806; }
-.confidence.low { background: #fff7e6; color: #d46b08; }
-.confidence.hypothesis { background: var(--color-primary-light); color: var(--color-primary); }
-
-/*
- * ============================================================
- * 指标卡样式
- * ============================================================
- * 来源：iuap-data-visualization/templates/indicator/fragment.html
- * ============================================================
- */
-.indicator-section {
-  margin: 24px 0;
-  padding: 0;
+/* 图表容器 */
+.chart-container {
+  width: 100%;
+  height: 400px;
 }
 
+/* 加载占位符 */
+.loading-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8c8c8c;
+  font-size: 14px;
+  background: #fafafa;
+  border-radius: 12px;
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+@keyframes loading-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ====== 指标卡样式 ====== */
+
+/* 卡片容器 */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
@@ -161,6 +104,7 @@ body {
   margin: 20px 0;
 }
 
+/* 数据卡片 */
 .data-card {
   position: relative;
   border-radius: 8px;
@@ -173,6 +117,7 @@ body {
   flex-direction: column;
 }
 
+/* 卡片头部行 */
 .card-header-row {
   display: flex;
   align-items: center;
@@ -181,7 +126,7 @@ body {
   flex-shrink: 0;
 }
 
-/* 卡片类型背景色 */
+/* 卡片背景色（11种） */
 .card-amount { background: rgba(50, 147, 251, 0.1); }
 .card-volume { background: rgba(50, 196, 250, 0.1); }
 .card-profit { background: rgba(130, 223, 43, 0.1); }
@@ -203,6 +148,7 @@ body {
   flex-shrink: 0;
 }
 
+/* 图标背景色（11种） */
 .icon-amount { background: #3293fb; }
 .icon-volume { background: #32c4fa; }
 .icon-profit { background: #82df2b; }
@@ -215,6 +161,7 @@ body {
 .icon-inventory { background: #fba344; }
 .icon-customer { background: #f6bd4c; }
 
+/* 卡片图标 */
 .card-icon {
   position: absolute;
   left: 0;
@@ -228,6 +175,7 @@ body {
   z-index: 1;
 }
 
+/* 指标标题 */
 .indicator-title {
   font-size: 15px;
   font-weight: 600;
@@ -237,6 +185,7 @@ body {
   text-overflow: ellipsis;
 }
 
+/* 指标数值 */
 .indicator-value {
   font-size: 24px;
   font-weight: 700;
@@ -247,6 +196,7 @@ body {
   overflow-wrap: break-word;
 }
 
+/* 数值单位 */
 .value-unit {
   font-size: 15px;
   font-weight: 600;
@@ -254,12 +204,14 @@ body {
   margin-left: 2px;
 }
 
+/* 趋势组 */
 .trend-group {
   display: flex;
   gap: 32px;
   margin-top: auto;
 }
 
+/* 趋势项 */
 .trend-item {
   display: flex;
   flex-wrap: wrap;
@@ -267,226 +219,83 @@ body {
   gap: 4px;
 }
 
+/* 趋势标签 */
 .trend-label {
   font-size: 12px;
   color: #4B5563;
   font-weight: 500;
 }
 
+/* 趋势上涨 */
 .trend-up {
   font-size: 13px;
   color: #fb6832;
   font-weight: 600;
 }
-.trend-up i { margin-right: 2px; }
+.trend-up i {
+  margin-right: 2px;
+}
 
+/* 趋势下跌 */
 .trend-down {
   font-size: 13px;
   color: #1cd46b;
   font-weight: 600;
 }
-.trend-down i { margin-right: 2px; }
+.trend-down i {
+  margin-right: 2px;
+}
 
+/* 趋势持平 */
 .trend-neutral {
   font-size: 13px;
   color: #8c8c8c;
   font-weight: 600;
 }
-.trend-neutral i { margin-right: 2px; }
-
-/*
- * ============================================================
- * 图表容器
- * ============================================================
- */
-.chart-container {
-  width: 100%; height: 400px;
-  background: var(--bg-content); border-radius: 8px; margin: 16px 0;
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08),
-    0 4px 16px rgba(0,0,0,0.04);
-}
-.chart-container.sm { height: 300px; }
-.chart-container.lg { height: 500px; }
-
-.loading-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: #8c8c8c;
-  font-size: 14px;
-  background: #fafafa;
-  border-radius: 12px;
-  animation: loading-pulse 1.5s ease-in-out infinite;
-}
-@keyframes loading-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+.trend-neutral i {
+  margin-right: 2px;
 }
 
-/* ====== 双图网格 ====== */
-.chart-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 20px; margin: 16px 0;
-}
-.chart-grid .chart-container {
-  margin: 0;
-  min-width: 0;
-  box-sizing: border-box;
-}
+/* ====== 响应式样式 ====== */
 
-/* ====== 行动建议卡片 ====== */
-.action-card {
-  background: var(--color-primary-light);
-  border-left: 3px solid var(--color-primary);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px; margin-bottom: 12px;
+/* ECharts 图表响应式 */
+@media (max-width: 1200px) {
+  .charts-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-.action-card .action-title {
-  font-size: 14px; font-weight: 600;
-  color: var(--text-primary); margin-bottom: 4px;
-}
-.action-card .action-desc { font-size: 13px; color: var(--text-secondary); }
-.action-card .priority {
-  display: inline-block; font-size: 11px;
-  padding: 1px 6px; border-radius: 3px; margin-right: 4px;
-}
-.priority.high { background: var(--color-danger); color: #fff; }
-.priority.medium { background: var(--color-accent); color: #fff; }
-.priority.low { background: var(--color-success); color: #fff; }
-
-/* ====== 风险提示 ====== */
-.risk-alert {
-  background: #fff1f0;
-  border-left: 3px solid var(--color-danger);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px; margin: 16px 0;
-}
-.risk-alert h3 { font-size: 14px; color: #cf1322; margin-bottom: 8px; }
-.risk-alert ul { margin: 0; padding-left: 20px; }
-.risk-alert li { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
-
-/* ====== 表格 ====== */
-.data-table {
-  width: 100%; border-collapse: collapse;
-  font-size: 13px; margin: 16px 0;
-}
-.data-table th {
-  background: var(--bg-card); font-weight: 600;
-  text-align: left; padding: 10px 12px;
-  border-bottom: 2px solid var(--border-color);
-}
-.data-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border-color);
-}
-.data-table tr:hover td { background: var(--bg-card); }
-
-/* ====== 假设树样式 ====== */
-.hypothesis-tree {
-  background: var(--bg-card); border-radius: 8px;
-  padding: 20px 24px; margin: 16px 0;
-  font-size: 13px; line-height: 2;
-  border: 1px solid var(--border-color);
-}
-.hypothesis-tree .hypothesis-item { padding: 4px 0; }
-.hypothesis-tree .hypothesis-tag {
-  display: inline-block; font-size: 11px;
-  padding: 1px 6px; border-radius: 3px; margin-right: 4px;
-}
-.hypothesis-tag.p0 { background: #fff1f0; color: #cf1322; }
-.hypothesis-tag.p1 { background: #fffbe6; color: #d48806; }
-.hypothesis-tag.p2 { background: var(--color-primary-light); color: var(--color-primary); }
-
-/* ====== 数据健康度评分卡 ====== */
-.quality-scorecard {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 12px; margin: 16px 0;
-}
-.quality-item {
-  background: var(--bg-card); border-radius: 8px;
-  padding: 12px; text-align: center;
-}
-.quality-item .quality-label { font-size: 12px; color: var(--text-muted); }
-.quality-item .quality-status { font-size: 20px; margin-top: 4px; }
-
-/* ====== 归因贡献度进度条 ====== */
-.progress-bar {
-  position: relative;
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  height: 24px;
-  overflow: hidden;
-}
-.progress-fill.positive {
-  background: linear-gradient(90deg, #10b981, #34d399);
-  height: 100%;
-  border-radius: 12px;
-}
-.progress-fill.negative {
-  background: linear-gradient(90deg, #ef4444, #f87171);
-  height: 100%;
-  border-radius: 12px;
-}
-.progress-bar span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* ====== 报告底部 ====== */
-.report-footer {
-  padding: 20px 40px;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-}
-.report-footer-text {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-/* 底部标签样式（使用主题色系） */
-.footer-tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 12px;
-}
-.footer-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-}
-.footer-tag i { font-size: 14px; }
-.footer-tag.source {
-  background: rgba(50, 147, 251, 0.1);
-  color: #3293fb;
-}
-.footer-tag.method {
-  background: rgba(130, 223, 43, 0.1);
-  color: #6bbd2e;
-}
-
-/* ====== 响应式 ====== */
 @media (max-width: 768px) {
-  .report-header, .report-body { padding-left: 20px; padding-right: 20px; }
-  .chart-grid { grid-template-columns: 1fr; }
-  .quality-scorecard { grid-template-columns: repeat(3, 1fr); }
-  .data-card { min-height: 130px; padding: 16px 20px; }
-  .indicator-value { font-size: 22px; }
-  .trend-group { gap: 24px; }
+  .charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .chart-container {
+    height: 320px;
+  }
 }
-@media (max-width: 480px) {
-  .quality-scorecard { grid-template-columns: repeat(2, 1fr); }
-  .report-header h1 { font-size: 20px; }
+
+/* 指标卡响应式 */
+@media (max-width: 768px) {
+  .data-card {
+    min-height: 130px;
+    padding: 16px 20px;
+  }
+  .indicator-value {
+    font-size: 22px;
+  }
+  .trend-group {
+    gap: 24px;
+  }
+}
+
+/* ====== 打印样式 ====== */
+
+@media print {
+  .chart-card {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+    break-inside: avoid;
+  }
+  .data-card {
+    break-inside: avoid;
+  }
 }
