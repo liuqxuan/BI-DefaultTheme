@@ -1,0 +1,301 @@
+/**
+ * 可视化技能统一样式文件
+ * 来源：iuap-data-visualization 技能
+ * CDN 地址：https://cdn.jsdelivr.net/gh/liuqxuan/BI-DefaultTheme@v1.0.6/visualization-styles.css
+ *
+ * 包含内容：
+ * 1. ECharts 图表布局样式
+ * 2. 指标卡样式（卡片、图标、趋势）
+ * 3. 响应式样式
+ * 4. 打印样式
+ */
+
+/* ====== ECharts 图表布局样式 ====== */
+
+/* 容器 */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 单图居中布局 */
+.single-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.single-chart .chart-card {
+  max-width: 900px;
+  width: 100%;
+}
+
+/* 批量模式网格布局 */
+.charts-grid {
+  display: grid;
+  gap: 20px;
+}
+.charts-grid.cols-1 {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+.charts-grid.cols-1 .chart-card {
+  max-width: 900px;
+  width: 100%;
+}
+.charts-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.charts-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.charts-grid.cols-auto {
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+}
+
+/* 图表卡片 */
+.chart-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08),
+    0 4px 16px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.chart-card:hover {
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.12),
+    0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* 图表容器 */
+.chart-container {
+  width: 100%;
+  height: 400px;
+}
+
+/* 加载占位符 */
+.loading-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8c8c8c;
+  font-size: 14px;
+  background: #fafafa;
+  border-radius: 12px;
+  animation: loading-pulse 1.5s ease-in-out infinite;
+}
+@keyframes loading-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ====== 指标卡样式 ====== */
+
+/* 卡片容器 */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 16px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+/* 数据卡片 */
+.data-card {
+  position: relative;
+  border-radius: 8px;
+  opacity: 1;
+  overflow: hidden;
+  min-height: 140px;
+  height: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 卡片头部行 */
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+/* 卡片背景色（11种） */
+.card-amount { background: rgba(50, 147, 251, 0.1); }
+.card-volume { background: rgba(50, 196, 250, 0.1); }
+.card-profit { background: rgba(130, 223, 43, 0.1); }
+.card-cost { background: rgba(252, 181, 48, 0.1); }
+.card-sales { background: rgba(251, 104, 50, 0.1); }
+.card-users { background: rgba(115, 124, 253, 0.1); }
+.card-rate { background: rgba(28, 212, 107, 0.1); }
+.card-time { background: rgba(185, 114, 252, 0.1); }
+.card-growth { background: rgba(119, 216, 63, 0.1); }
+.card-inventory { background: rgba(251, 163, 68, 0.1); }
+.card-customer { background: rgba(246, 189, 76, 0.1); }
+
+/* 图标背景 */
+.icon-bg {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* 图标背景色（11种） */
+.icon-amount { background: #3293fb; }
+.icon-volume { background: #32c4fa; }
+.icon-profit { background: #82df2b; }
+.icon-cost { background: #fcb530; }
+.icon-sales { background: #fb6832; }
+.icon-users { background: #737cfd; }
+.icon-rate { background: #1cd46b; }
+.icon-time { background: #b972fc; }
+.icon-growth { background: #77d83f; }
+.icon-inventory { background: #fba344; }
+.icon-customer { background: #f6bd4c; }
+
+/* 卡片图标 */
+.card-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  line-height: 20px !important;
+  text-align: center;
+  font-size: 10px;
+  color: #ffffff;
+  z-index: 1;
+}
+
+/* 指标标题 */
+.indicator-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 指标数值 */
+.indicator-value {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111827;
+  margin-bottom: 8px;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* 数值单位 */
+.value-unit {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+  margin-left: 2px;
+}
+
+/* 趋势组 */
+.trend-group {
+  display: flex;
+  gap: 32px;
+  margin-top: auto;
+}
+
+/* 趋势项 */
+.trend-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 趋势标签 */
+.trend-label {
+  font-size: 12px;
+  color: #4B5563;
+  font-weight: 500;
+}
+
+/* 趋势上涨 */
+.trend-up {
+  font-size: 13px;
+  color: #fb6832;
+  font-weight: 600;
+}
+.trend-up i {
+  margin-right: 2px;
+}
+
+/* 趋势下跌 */
+.trend-down {
+  font-size: 13px;
+  color: #1cd46b;
+  font-weight: 600;
+}
+.trend-down i {
+  margin-right: 2px;
+}
+
+/* 趋势持平 */
+.trend-neutral {
+  font-size: 13px;
+  color: #8c8c8c;
+  font-weight: 600;
+}
+.trend-neutral i {
+  margin-right: 2px;
+}
+
+/* ====== 响应式样式 ====== */
+
+/* ECharts 图表响应式 */
+@media (max-width: 1200px) {
+  .charts-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .chart-container {
+    height: 320px;
+  }
+}
+
+/* 指标卡响应式 */
+@media (max-width: 768px) {
+  .data-card {
+    min-height: 130px;
+    padding: 16px 20px;
+  }
+  .indicator-value {
+    font-size: 22px;
+  }
+  .trend-group {
+    gap: 24px;
+  }
+}
+
+/* ====== 打印样式 ====== */
+
+@media print {
+  .chart-card {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+    break-inside: avoid;
+  }
+  .data-card {
+    break-inside: avoid;
+  }
+}
