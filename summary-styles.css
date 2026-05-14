@@ -1,0 +1,138 @@
+/* ============================================================
+ * 摘要页面样式
+ * ============================================================
+ * 文件：config/summary-styles.css
+ * 说明：摘要页面的样式真理源，templates/summary/base.html 引用此文件
+ * ============================================================ */
+
+/* ====== Reset & Base ====== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ====== 主题 CSS 变量 ====== */
+:root {
+  /* 主色调：与 ECharts defaultTheme 首色 #3293fb 同步 */
+  --color-primary: #3293fb;
+  --color-primary-dark: #1a73e8;
+  --color-primary-light: #e6f7ff;
+  --color-primary-rgb: 50, 147, 251;
+  /* 辅助色：与 ECharts defaultTheme 色板同步 */
+  --color-secondary: #82df2b;
+  --color-accent: #fcb530;
+  --color-warning: #fb6832;
+  --color-danger: #ff4d4f;
+  --color-success: #52c41a;
+  /* 背景色 */
+  --bg-page: #f0f2f5;
+  --bg-content: #ffffff;
+  --bg-card: #fafafa;
+  /* 文字色 */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #8c8c8c;
+  /* 边框色 */
+  --border-color: #f0f0f0;
+}
+
+/* ====== 页面容器 ====== */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ====== 摘要容器 ====== */
+.summary {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg-content);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* ====== 摘要头部 ====== */
+.summary-header {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  padding: 24px 40px;
+}
+.summary-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+/* 简洁头部变体 */
+.summary-header.simple {
+  background: var(--bg-content);
+  border-bottom: 3px solid var(--color-primary);
+  color: var(--text-primary);
+}
+.summary-header.simple h1 {
+  color: var(--text-primary);
+}
+
+/* ====== 摘要正文区 ====== */
+.summary-body {
+  padding: 32px 40px;
+}
+
+/* ====== 核心发现模块 ====== */
+.core-findings {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-primary);
+}
+
+.findings-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.findings-content {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.findings-content .highlight {
+  color: var(--color-primary);
+  font-weight: 600;
+  display: inline;
+}
+
+.findings-content .trend-up {
+  color: #fb6832;
+  font-weight: 600;
+  display: inline;
+}
+
+.findings-content .trend-down {
+  color: #1cd46b;
+  font-weight: 600;
+  display: inline;
+}
+
+/*
+ * ============================================================
+ * 【委托】指标卡样式
+ * ============================================================
+ * ⚠️ 指标卡样式由 iuap-data-visualization 统一管理
+ * 唯一样式来源：../iuap-data-visualization/templates/indicator/fragment.html
+ *
+ * 禁止事项：
+ * - 禁止在此定义 .data-card、.indicator-title、.indicator-value 等样式
+ * - 禁止使用 .data-cards、.label、.value、.unit 等错误类名
+ * - 禁止自定义颜色，必须使用 11 色系列
+ * - 禁止自定义卡片结构
+ *
+ * 使用方法：生成摘要前必须读取 fragment.html 获取完整样式
+ * ============================================================
+ */
+
+/* ====== 响应式适配 ====== */
+@media (max-width: 768px) {
+  .summary-header { padding: 20px; }
+  .summary-body { padding: 20px; }
+}
