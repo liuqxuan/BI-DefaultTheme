@@ -4,11 +4,11 @@ window.getDefaultTheme = function () {
     const echartsDefaultTheme = {
         color: [
             '#3293fb',
+            '#737cfd',
             '#82df2b',
             '#32c4fa',
             '#fcb530',
             '#fb6832',
-            '#737cfd',
             '#1cd46b',
             '#b972fc',
             '#77d83f',
